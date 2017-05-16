@@ -3,3 +3,5 @@ SEMANTIC_TYPES = [
     ('Negative', 'Negative'),
     ('Intensifier', 'Intensifier'),
 ]
+
+CONTENT_RATING_KEY = 'review'
