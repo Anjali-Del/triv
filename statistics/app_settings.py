@@ -4,4 +4,4 @@ SEMANTIC_TYPES = [
     ('Intensifier', 'Intensifier'),
 ]
 
-CONTENT_RATING_KEY = 'review'
+CONTENT_RATING_KEY = 'Review'

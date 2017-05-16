@@ -66,18 +66,20 @@ def update_ratings(ratings, content, hid, rid):
         val = float(value)
         entry = HotelRatings(hotel_id=hid, review_id=rid, topic=key, score=val)
         entries.append(entry)
-    if content:
-        entry = HotelRatings(hotel_id=hid, review_id=rid,
-                             topic=aps.CONTENT_RATING_KEY,
-                             score=get_intensified_score(content))
-        entries.append(entry)
+    # TODO: Content can be analyzed/sentiment analysis can be implemented with normalized score
+    # if content:
+    #     entry = HotelRatings(hotel_id=hid, review_id=rid,
+    #                          topic=aps.CONTENT_RATING_KEY,
+    #                          score=get_intensified_score(content))
+    #     entries.append(entry)
 
     try:
         HotelRatings.objects.bulk_create(entries)
     except IntegrityError as e:
         keys = ratings.keys()
         keys.append(aps.CONTENT_RATING_KEY)
-        HotelRatings.objects.filter(hotel_id=hid, review_id=rid, topic__in=keys).delete()
+        HotelRatings.objects.filter(hotel_id=hid, review_id=rid, topic__in=keys
+            ).delete()
         HotelRatings.objects.bulk_create(entries)
 
 

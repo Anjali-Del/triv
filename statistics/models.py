@@ -2,6 +2,8 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
 
+from base_model import TruncatingCharField
+
 import app_settings
 
 
@@ -30,7 +32,7 @@ class HotelReviews(models.Model):
     author = models.CharField(max_length=128)
     author_location = models.CharField(max_length=128)
     review_date = models.DateTimeField(default=timezone.now())
-    content = models.CharField(max_length=5126)
+    content = TruncatingCharField(max_length=5126)
 
 
 class HotelRatings(models.Model):
