@@ -19,6 +19,7 @@ def get_scores(request, topic=''):
         hotel = tasks.get_hotel_info(data['HotelInfo'])
         tasks.update_hotel_reviews(data, hotel)
         if topic:
+            # If data required only as per file, pass hotel_id as well.
             params = { 'topic': topic }
         else:
             params = {}
@@ -26,6 +27,6 @@ def get_scores(request, topic=''):
         if not resp:
             return JsonResponse({'Status': 404, 'Message': 'Invalid topic requested'})
     else:
-        return JsonResponse({'Status': 405, 'Message': 'Invalid GET request.'})
+        resp = analytics.get_analytics()
 
     return JsonResponse(resp)

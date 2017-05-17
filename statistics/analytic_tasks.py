@@ -5,6 +5,7 @@ from models import HotelRatings
 
 import re
 
+
 def get_analytics(**kwargs):
     analytics_dict = {}
     if 'topic' in kwargs.keys():
@@ -27,7 +28,6 @@ def get_matching_string(topic):
     from nltk.corpus import wordnet as wn
 
     keys = list(HotelRatings.objects.all().values_list('topic', flat=True).distinct())
-    # print keys
     init_max_score = 0
     new_topic = topic
     for key in keys:
