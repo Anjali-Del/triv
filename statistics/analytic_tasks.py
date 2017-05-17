@@ -30,8 +30,11 @@ def get_matching_string(topic):
     keys = list(HotelRatings.objects.all().values_list('topic', flat=True).distinct())
     init_max_score = 0
     new_topic = topic
+
     for key in keys:
-        if topic.lower() in key.lower():
+        if topic.lower == key.lower():
+            topic = key
+        elif topic not in keys and topic.lower() in key.lower():
             topic = key
 
     if topic not in keys:
